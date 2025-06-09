@@ -16,7 +16,7 @@ export default mergeConfig(
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
       },
-      include: ['**/*.{test,spec}.{ts,tsx}'],
+      include: ['**/*.test.{ts,tsx}'],
       exclude: ['node_modules', 'dist', '.idea', '.git', '.cache'],
       typecheck: {
         tsconfig: './tsconfig.test.json',
