@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import qmatesLogo from './assets/qmates.svg'
 import './App.css'
+import '@picocss/pico'
 
 function App() {
   const [count, setCount] = useState(0)
