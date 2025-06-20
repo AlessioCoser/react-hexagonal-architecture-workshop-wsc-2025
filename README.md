@@ -27,7 +27,7 @@ pnpm test:unit [test-name.test.tsx]
 ```
 Run unit-tests in watch mode:
 ```bash
-pnpm test:watch
+pnpm test:unit:watch
 ```
 Run unit-tests with coverage:
 ```bash
@@ -38,11 +38,7 @@ pnpm test:coverage
 ```bash
 pnpm test:e2e [test-name.spec.ts]
 ```
-Run in debug mode:
+Run in UI mode:
 ```bash
-pnpm test:e2e:debug
-```
-Run browser e2e tests in headed mode:
-```bash
-pnpm test:e2e --headed
+pnpm test:e2e:ui
 ```
