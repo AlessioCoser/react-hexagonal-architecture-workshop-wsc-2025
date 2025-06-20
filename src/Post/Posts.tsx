@@ -1,9 +1,10 @@
-import { useUserSession } from '../User/UserSessionHook.tsx'
-import { useState } from 'react'
+import { useUserSession } from '../User/UserSessionHook.ts'
+import { PostsList } from './PostsList/PostsList.tsx'
+import { usePostsList } from './PostsList/PostsListHook.tsx'
 
 export function Posts() {
   const { loading } = useUserSession()
-  const [count, setCount] = useState(0)
+  const { posts, isLoading } = usePostsList()
 
   if (loading) {
     return <></>
@@ -15,12 +16,8 @@ export function Posts() {
         <h3>Hexagonal Architecture</h3>
       </header>
       <div>
-        <button onClick={handleClick}>count is {count}</button>
+        <PostsList posts={posts} isLoading={isLoading} />
       </div>
     </article>
   )
-
-  function handleClick() {
-    setCount(count => count + 1)
-  }
 }

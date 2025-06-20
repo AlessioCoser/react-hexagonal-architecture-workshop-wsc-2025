@@ -1,4 +1,4 @@
-import { useUserSession } from '../User/UserSessionHook.tsx'
+import { useUserSession } from '../User/UserSessionHook.ts'
 import qmatesLogo from '../assets/qmates.svg'
 
 export function Navigation() {
