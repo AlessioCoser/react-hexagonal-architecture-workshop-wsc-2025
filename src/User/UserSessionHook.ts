@@ -9,7 +9,5 @@ export const useUserSession = (): UserSession => {
     queryFn: () => loadOrGenerateUser(),
   })
 
-  return isLoading
-    ? { user: undefined, loading: true }
-    : { user: user!, loading: false }
+  return isLoading ? { user: undefined, loading: true } : { user: user!, loading: false }
 }
