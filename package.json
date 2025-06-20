@@ -22,7 +22,7 @@
     "@testing-library/user-event": "^14.6.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "uuid": "^11.1.0"
+    "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
