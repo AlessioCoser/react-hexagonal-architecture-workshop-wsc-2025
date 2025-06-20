@@ -1,12 +1,12 @@
 import { useUserSession } from '../User/UserSessionHook.ts'
 import { PostsList } from './PostsList/PostsList.tsx'
-import { usePostsList } from './PostsList/PostsListHook.tsx'
+import { usePostsList } from './PostsList/PostsListHook.ts'
 
 export function Posts() {
-  const { loading } = useUserSession()
-  const { posts, isLoading } = usePostsList()
+  const { loading: isUserLoading } = useUserSession()
+  const { isLoading: arePostsLoading, posts } = usePostsList()
 
-  if (loading) {
+  if (isUserLoading) {
     return <></>
   }
 
@@ -16,7 +16,7 @@ export function Posts() {
         <h3>Hexagonal Architecture</h3>
       </header>
       <div>
-        <PostsList posts={posts} isLoading={isLoading} />
+        <PostsList posts={posts} isLoading={arePostsLoading} />
       </div>
     </article>
   )
