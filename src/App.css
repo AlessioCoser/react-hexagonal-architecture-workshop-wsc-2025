@@ -1,7 +1,56 @@
 #root {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    flex-direction: column;
+    width: 100vw;
 }
 
-.logo {
-    padding: 1.5em;
+.top-bar {
+    display: flex;
+    width: 100%;
+    box-shadow: var(--pico-card-box-shadow);
+    margin-bottom: calc(var(--pico-typography-spacing-vertical) * 3);
+}
+
+.page {
+    flex: 1;
+}
+
+article header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+article header .link {
+    text-wrap: nowrap;
+}
+
+article footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+article footer [type=button] {
+    margin-bottom: 0;
+}
+
+article footer .error {
+    color: var(--pico-color-red-550);
+}
+
+article header > h3 {
+    margin-top: var(--pico-typography-spacing-vertical);
+    margin-bottom: var(--pico-typography-spacing-vertical);
+}
+
+nav .logo {
+    width: 150px;
+}
+
+nav li:empty {
+    display: none;
 }
