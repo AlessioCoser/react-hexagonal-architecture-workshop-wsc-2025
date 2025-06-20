@@ -2,23 +2,26 @@ import '@picocss/pico'
 import { useState } from 'react'
 import qmatesLogo from './assets/qmates.svg'
 import './App.css'
+import { ModalProvider } from './helpers/Modal/ModalProvider.tsx'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <header className='top-bar'>
+    <ModalProvider>
+      <header className="top-bar">
         <nav className="container">
           <ul>
-            <li><img src={qmatesLogo} className="logo" alt="QMates logo" /></li>
+            <li>
+              <img src={qmatesLogo} className="logo" alt="QMates logo" />
+            </li>
           </ul>
           <ul>
             <li></li>
           </ul>
         </nav>
       </header>
-      <div className='container page'>
+      <div className="container page">
         <article className="wall">
           <header>
             <h3>Hexagonal Architecture</h3>
@@ -28,7 +31,7 @@ function App() {
           </div>
         </article>
       </div>
-    </>
+    </ModalProvider>
   )
 
   function handleClick() {
