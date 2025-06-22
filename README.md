@@ -16,7 +16,7 @@ pnpm dev
 ```
 
 ## Running All Tests
-Run first unit and then e2e (only if unit tests pass):
+Run all unit tests first, and then run all e2e tests if the unit tests pass
 ```bash
 pnpm test
 ```
@@ -36,9 +36,15 @@ pnpm test:coverage
 
 ## Run e2e browser tests
 ```bash
-pnpm test:e2e [test-name.spec.ts]
+pnpm test:e2e
 ```
+
 Run in UI mode:
 ```bash
 pnpm test:e2e:ui
+```
+
+Run single file:
+```bash
+pnpm test:e2e test-name.spec.ts
 ```
