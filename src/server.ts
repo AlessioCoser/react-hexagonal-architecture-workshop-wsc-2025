@@ -2,6 +2,12 @@ import type { Post } from './Post/Post.ts'
 import type { PostDraft } from './Post/PostDraft.ts'
 import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest } from 'fastify'
 
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, X-Username',
+}
+
 const posts: Post[] = []
 
 function retrieveAllPosts(): Post[] {
@@ -12,7 +18,7 @@ function createNewPost(userName: string, draft: PostDraft): Post {
   const newPost = {
     id: String(posts.length + 1),
     text: draft.text,
-    tags: draft.tags.split(',').map(tag => tag.trim()),
+    tags: draft.tags ? draft.tags.split(',').map(tag => tag.trim()) : undefined,
     title: draft.title,
     author: userName,
     dateTime: new Date().toISOString(),
@@ -34,8 +40,13 @@ function routes(fastify: FastifyInstance) {
   fastify.get('/api/posts', { preHandler: validateUsername }, retrieveAllPosts)
   fastify.post('/api/posts', { preHandler: validateUsername }, (request, reply) => {
     const username = request.headers['x-username'] as string
-    const draft = request.body as PostDraft
+    const draft = JSON.parse(request.body as string) as PostDraft
     reply.code(201).send(createNewPost(username, draft))
+  })
+  fastify.addHook('onRequest', (request, reply, done) => {
+    reply.headers(corsHeaders)
+    if (request.method === 'OPTIONS') return reply.code(204).send()
+    done()
   })
 }
 

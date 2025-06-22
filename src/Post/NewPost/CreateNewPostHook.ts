@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import type { PostDraft } from '../PostDraft.ts'
 import { useState } from 'react'
 import { useUserSession } from '../../User/UserSessionHook.ts'
-import { createNewPost } from '../../server.ts'
+import { type CreateNewPostAPIException, createNewPostsAPI, type NewPostsAPI } from './CreateNewPostAPI.ts'
 
 export type NewPost = {
   readonly draft: PostDraft
@@ -11,18 +11,34 @@ export type NewPost = {
   readonly isCreating?: boolean
 }
 
-export const useCreateNewPost = (): NewPost => {
+const newPostsAPI = createNewPostsAPI()
+
+export const useCreateNewPost = (API: NewPostsAPI = newPostsAPI): NewPost => {
   const { user } = useUserSession()
   const [draft, setDraft] = useState<PostDraft>({ title: '', tags: '', text: '' })
   const { isPending, mutateAsync } = useMutation({
     mutationKey: ['create-new-post'],
-    mutationFn: (draft: PostDraft) => createNewPost(user, draft),
+    mutationFn: (draft: PostDraft) => API.createNewPost(draft, user),
   })
 
   return {
     draft: draft,
     updateDraft: newDraft => setDraft(newDraft),
-    publishDraft: () => mutateAsync(draft).then(() => setDraft({ title: '', tags: '', text: '' })),
+    publishDraft: () =>
+      mutateAsync(draft)
+        .then(() => setDraft({ title: '', tags: '', text: '' }))
+        .catch((error) => Promise.reject(mapToErrorMessage(error))),
     isCreating: isPending,
+  }
+
+  function mapToErrorMessage(error: CreateNewPostAPIException): string {
+    switch (error) {
+      case 'UNAUTHORIZED':
+        return 'User not found'
+      case 'NETWORK_ERROR':
+        return 'Network error'
+      default:
+        return 'An unexpected error occurred'
+    }
   }
 }

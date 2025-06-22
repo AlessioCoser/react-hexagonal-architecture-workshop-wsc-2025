@@ -1,11 +1,15 @@
 import { useQuery } from '@tanstack/react-query'
 import type { Post } from '../Post.ts'
-import { retrieveAllPosts } from '../../server.ts'
+import { createPostsListAPI, type PostsListAPI } from './PostListAPI.ts'
+import { useUserSession } from '../../User/UserSessionHook.ts'
 
-export const usePostsList = () => {
+const postListAPI: PostsListAPI = createPostsListAPI()
+
+export const usePostsList = (API: PostsListAPI = postListAPI) => {
+  const { user } = useUserSession()
   const { refetch, data, isLoading } = useQuery<Post[]>({
     queryKey: ['posts-list'],
-    queryFn: () => retrieveAllPosts(),
+    queryFn: () => API.retrieveAllPosts(user),
   })
 
   return {

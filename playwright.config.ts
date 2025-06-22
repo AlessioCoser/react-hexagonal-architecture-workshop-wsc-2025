@@ -26,7 +26,7 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
     },
     {
-      command: 'pnpm start:api', // Command to start your API server
+      command: 'pnpm dev:api', // Command to start your API server
       url: 'http://localhost:3000/health', // Health check endpoint to verify API is running
       reuseExistingServer: !process.env.CI,
       timeout: 5000, // Timeout in milliseconds for the server to start
