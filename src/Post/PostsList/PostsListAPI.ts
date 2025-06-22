@@ -13,7 +13,15 @@ export function createPostsListAPI(baseUrl: string = Env.backendUrl): PostsListA
       const response = await getRequest(`${baseUrl}/api/posts`, user)
       if (response.status === 401) throw 'UNAUTHORIZED'
       const responseBody = await response.json()
-      return responseBody as Post[]
+
+      return responseBody.map((post: Post) => ({
+        id: post.id,
+        author: post.author,
+        title: post.title,
+        text: post.text,
+        tags: post.tags,
+        dateTime: post.dateTime,
+      }))
     },
   }
 }

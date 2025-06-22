@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import type { Post } from '../Post.ts'
-import { createPostsListAPI, type PostsListAPI } from './PostListAPI.ts'
+import { createPostsListAPI, type PostsListAPI } from './PostsListAPI.ts'
 import { useUserSession } from '../../User/UserSessionHook.ts'
 
 const postListAPI: PostsListAPI = createPostsListAPI()

@@ -15,7 +15,16 @@ export function createNewPostsAPI(baseUrl: string = Env.backendUrl): NewPostsAPI
       const response = await postRequest(`${baseUrl}/api/posts`, draft, user)
       const body = await response.text()
       if (response.status === 401) throw 'UNAUTHORIZED'
-      return JSON.parse(body)
+
+      const returningPost = JSON.parse(body)
+      return {
+        id: returningPost.id,
+        author: returningPost.author,
+        title: returningPost.title,
+        text: returningPost.text,
+        tags: returningPost.tags,
+        dateTime: returningPost.dateTime,
+      }
     },
   }
 }
