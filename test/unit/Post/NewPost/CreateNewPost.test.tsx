@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { CreateNewPost } from '../../../../src/Post/NewPost/CreateNewPost.tsx'
+// import { render, screen, waitFor } from '@testing-library/react';
+// import userEvent from '@testing-library/user-event';
+// import { CreateNewPost } from '../../../../src/Post/NewPost/CreateNewPost.tsx'
 
 describe('CreateNewPost', () => {
-  const aPost = { id: "123", userId: "user-id", text: "text", dateTime: "2021-09-01T00:00:00Z", username: "You" };
+  // const aPost = { id: "123", userId: "user-id", text: "text", dateTime: "2021-09-01T00:00:00Z", username: "You" };
 
   it('todo', () => {
     expect('').toBe('Implement tests for CreateNewPost');
