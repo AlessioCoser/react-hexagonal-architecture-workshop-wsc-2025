@@ -14,6 +14,7 @@ pnpm install
 ```bash
 pnpm dev
 ```
+This command will run the frontend application with hot reloading and the backend API server in watch mode.
 
 ## Running All Tests
 Run all unit tests first, and then run all e2e tests if the unit tests pass

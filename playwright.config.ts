@@ -19,9 +19,17 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
   ],
-  webServer: {
-    command: 'pnpm dev',
-    url: 'http://localhost:5173',
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: 'pnpm dev:ui',
+      url: 'http://localhost:5173',
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: 'pnpm start:api', // Command to start your API server
+      url: 'http://localhost:3000/health', // Health check endpoint to verify API is running
+      reuseExistingServer: !process.env.CI,
+      timeout: 5000, // Timeout in milliseconds for the server to start
+    }
+  ],
 })
