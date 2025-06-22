@@ -3,12 +3,14 @@ import { PostsList } from './PostsList/PostsList.tsx'
 import { usePostsList } from './PostsList/PostsListHook.ts'
 import { useModal } from '../helpers/Modal/ModalProvider.tsx'
 import { CreateNewPost } from './NewPost/CreateNewPost.tsx'
-import { useCreateNewPost } from './NewPost/CreateNewPostHook.ts'
+import { useEffect } from 'react'
 
 export function PostsPage() {
-  const { open } = useModal()
+  const { open, isClosed } = useModal()
   const { loading: isUserLoading } = useUserSession()
-  const { isLoading: arePostsLoading, posts } = usePostsList()
+  const { isLoading: arePostsLoading, posts, update: updatePosts } = usePostsList()
+
+  useEffect(reloadPostsOnModalClosed, [isClosed])
 
   if (isUserLoading) {
     return <></>
@@ -29,7 +31,13 @@ export function PostsPage() {
   function openCreateNewPostModal() {
     open({
       title: `Create New Post`,
-      content: <CreateNewPost />
+      content: <CreateNewPost />,
     })
+  }
+
+  function reloadPostsOnModalClosed() {
+    if (isClosed) {
+      updatePosts().catch(() => {})
+    }
   }
 }
