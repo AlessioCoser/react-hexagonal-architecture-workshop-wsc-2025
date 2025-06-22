@@ -1,7 +1,7 @@
 import '@picocss/pico'
 import './App.css'
 import { ModalProvider } from './helpers/Modal/ModalProvider.tsx'
-import { Posts } from './Post/Posts.tsx'
+import { PostsPage } from './Post/PostsPage.tsx'
 import { Navigation } from './helpers/Navigation.tsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -15,7 +15,7 @@ function App() {
           <Navigation />
         </header>
         <div className="container page">
-          <Posts />
+          <PostsPage />
         </div>
       </ModalProvider>
     </QueryClientProvider>

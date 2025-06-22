@@ -2,12 +2,12 @@ import { PostItem } from './PostItem.tsx'
 import './PostsList.css'
 import type { Post } from '../Post.ts'
 
-type PostsProps = {
+type PostsListProps = {
   posts: Post[]
   isLoading: boolean
 }
 
-export function PostsList({ posts, isLoading }: PostsProps) {
+export function PostsList({ posts, isLoading }: PostsListProps) {
   if (posts.length === 0 && !isLoading) {
     return <div className="posts-list empty-list">No posts present.</div>
   }

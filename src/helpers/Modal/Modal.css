@@ -10,18 +10,18 @@ dialog.modal > article {
   overflow: hidden;
 }
 
-dialog.modal > article > header {
+dialog.modal > article header {
   margin: 0;
   padding: var(--pico-block-spacing-vertical) var(--pico-block-spacing-horizontal);
 }
 
-dialog.modal > article > div.content {
+dialog.modal > article div.content {
   flex: 1;
   overflow-y: auto;
   padding: var(--pico-block-spacing-vertical) var(--pico-block-spacing-horizontal);
 }
 
-dialog.modal > article > footer {
+dialog.modal > article footer {
   margin: 0;
   padding: var(--pico-block-spacing-vertical) var(--pico-block-spacing-horizontal);
 }

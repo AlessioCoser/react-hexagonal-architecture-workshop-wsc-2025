@@ -1,0 +1,1 @@
+export type PostDraft = { title: string; tags: string; text: string }

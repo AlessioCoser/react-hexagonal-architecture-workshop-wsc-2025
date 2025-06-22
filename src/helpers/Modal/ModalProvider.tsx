@@ -50,10 +50,10 @@ export function ModalProvider({ children }: { children: ReactNode }): ReactNode 
   return (<>
     <ModalContext.Provider value={modal}>
       {children}
+      <Modal status={status} title={title} footer={footer} close={modal.close} onClosed={onClosed}>
+        {content}
+      </Modal>
     </ModalContext.Provider>
-    <Modal status={status} title={title} footer={footer} close={modal.close} onClosed={onClosed}>
-      {content}
-    </Modal>
   </>
   );
 }
