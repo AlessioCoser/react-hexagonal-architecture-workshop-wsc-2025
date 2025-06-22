@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createNewPostsAPI } from '../../../../src/Post/NewPost/CreateNewPostAPI.ts'
 import nock from 'nock'
-import type { PostDraft } from '../../../../src/Post/PostDraft.ts'
+import type { PostDraft } from '../../../../src/Post/NewPost/PostDraft.ts'
 
 describe('CreateNewPostsAPI', () => {
   const BASE_URL = 'http://backend.local'

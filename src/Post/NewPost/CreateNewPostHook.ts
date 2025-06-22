@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import type { PostDraft } from '../PostDraft.ts'
+import type { PostDraft } from './PostDraft.ts'
 import { useState } from 'react'
 import { useUserSession } from '../../User/UserSessionHook.ts'
 import { type CreateNewPostAPIException, createNewPostsAPI, type NewPostsAPI } from './CreateNewPostAPI.ts'

@@ -2,7 +2,7 @@ import { Env } from '../../Env'
 import { type User } from '../../User/User'
 import { type Post } from '../Post'
 import { type NetworkError, postRequest } from '../../helpers/http'
-import type { PostDraft } from '../PostDraft.ts'
+import type { PostDraft } from './PostDraft.ts'
 
 export type CreateNewPostAPIException = 'UNAUTHORIZED' | NetworkError
 export type NewPostsAPI = {

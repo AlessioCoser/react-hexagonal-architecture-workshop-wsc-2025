@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { createNewPostsAPI } from '../../../../src/Post/NewPost/CreateNewPostAPI.ts'
 import nock from 'nock'
-import type { PostDraft } from '../../../../src/Post/PostDraft.ts'
+import type { PostDraft } from '../../../../src/Post/NewPost/PostDraft.ts'
 import { createPostsListAPI } from '../../../../src/Post/PostsList/PostsListAPI.ts'
 import type { Post } from '../../../../src/Post/Post.ts'
 

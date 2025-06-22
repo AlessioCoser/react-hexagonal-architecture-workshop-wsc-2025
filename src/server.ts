@@ -1,5 +1,5 @@
 import type { Post } from './Post/Post.ts'
-import type { PostDraft } from './Post/PostDraft.ts'
+import type { PostDraft } from './Post/NewPost/PostDraft.ts'
 import Fastify, { type FastifyInstance, type FastifyReply, type FastifyRequest } from 'fastify'
 
 const corsHeaders = {
