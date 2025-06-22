@@ -3,6 +3,10 @@ import { expect, test } from '@playwright/test'
 test.setTimeout(2000);
 
 test.describe('Create New Post', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.unroute('**/api/posts');
+  });
+
   test('should create a new post and see it', async ({ page }) => {
     await page.goto('/')
     const newPostBtn = page.getByRole('button', { name: 'New Post' })
@@ -18,7 +22,7 @@ test.describe('Create New Post', () => {
   })
 
   test('should show an error when something goes wrong', async ({ page }) => {
-    // TODO: make this api break
+    await page.route('**/api/posts', route => route.fulfill({ status: 401 }));
     await page.goto('/')
     const newPostBtn = page.getByRole('button', { name: 'New Post' })
     await newPostBtn.click()
@@ -28,6 +32,6 @@ test.describe('Create New Post', () => {
     await page.getByRole('textbox', { name: 'Text' }).fill('I love waterfall')
     await page.getByRole('button', { name: 'Create' }).click()
 
-    await expect(page.getByText('Generic Error. Try again later.')).toBeVisible()
+    await expect(page.getByText('User not found')).toBeVisible()
   })
 })
