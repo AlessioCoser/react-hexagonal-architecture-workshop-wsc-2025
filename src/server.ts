@@ -13,10 +13,6 @@ export async function createNewPost(user: User | undefined, draft: PostDraft): P
     return Promise.reject('Unauthorized')
   }
 
-  if(draft.text.includes('waterfall')) {
-    return Promise.reject('Inappropriate language detected')
-  }
-
   const newPost = {
     id: String(posts.length + 1),
     text: draft.text,

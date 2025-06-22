@@ -17,7 +17,8 @@ test.describe('Create New Post', () => {
     await expect(page.getByText('An interesting title')).toBeVisible()
   })
 
-  test('should show an error when inappropriate language detected', async ({ page }) => {
+  test('should show an error when something goes wrong', async ({ page }) => {
+    // TODO: make this api break
     await page.goto('/')
     const newPostBtn = page.getByRole('button', { name: 'New Post' })
     await newPostBtn.click()
@@ -27,6 +28,6 @@ test.describe('Create New Post', () => {
     await page.getByRole('textbox', { name: 'Text' }).fill('I love waterfall')
     await page.getByRole('button', { name: 'Create' }).click()
 
-    await expect(page.getByText('Inappropriate language detected')).toBeVisible()
+    await expect(page.getByText('Generic Error. Try again later.')).toBeVisible()
   })
 })
