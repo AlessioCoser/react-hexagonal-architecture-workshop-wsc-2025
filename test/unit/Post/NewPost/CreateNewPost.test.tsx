@@ -43,7 +43,7 @@ describe('CreateNewPost', () => {
     await userEvent.click(screen.getByRole('button'))
 
     expect(screen.getByRole('button')).toBeDisabled()
-    expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true');
+    expect(screen.getByRole('button')).toHaveAttribute('aria-busy', 'true')
   })
 
   it('should show the draft values', async () => {
@@ -104,7 +104,7 @@ describe('CreateNewPost', () => {
     await userEvent.click(screen.getByRole('button'))
 
     expect(hook.publishDraft).toHaveBeenCalled()
-    expect(screen.queryByTestId('create-new-post-error')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('create-new-post-error')).not.toBeInTheDocument()
   })
 
   it('should show an error', async () => {
@@ -113,7 +113,7 @@ describe('CreateNewPost', () => {
 
     await userEvent.click(screen.getByRole('button'))
 
-    expect(screen.queryByTestId('create-new-post-error')).toBeInTheDocument();
-    expect(screen.queryByTestId('create-new-post-error')).toHaveTextContent('Network error');
+    expect(screen.queryByTestId('create-new-post-error')).toBeInTheDocument()
+    expect(screen.queryByTestId('create-new-post-error')).toHaveTextContent('Network error')
   })
 })
