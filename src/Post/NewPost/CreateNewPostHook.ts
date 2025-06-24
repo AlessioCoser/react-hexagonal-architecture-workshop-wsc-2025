@@ -27,7 +27,7 @@ export const useCreateNewPost = (API: NewPostsAPI = newPostsAPI): NewPost => {
     publishDraft: () =>
       mutateAsync(draft)
         .then(() => setDraft({ title: '', tags: '', text: '' }))
-        .catch((error) => Promise.reject(mapToErrorMessage(error))),
+        .catch(error => Promise.reject(mapToErrorMessage(error))),
     isCreating: isPending,
   }
 
