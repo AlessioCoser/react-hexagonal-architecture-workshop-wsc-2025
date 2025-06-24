@@ -8,7 +8,7 @@ export type NewPost = {
   readonly draft: PostDraft
   readonly updateDraft: (newDraft: PostDraft) => void
   readonly publishDraft: () => Promise<void>
-  readonly isCreating?: boolean
+  readonly isCreating: boolean
 }
 
 const newPostsAPI = createNewPostsAPI()

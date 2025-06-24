@@ -6,7 +6,7 @@ export function CreateNewPost() {
   const { close } = useModal()
   const { draft, updateDraft, publishDraft, isCreating } = useCreateNewPost()
   const postTitle = useRef<HTMLInputElement>(null)
-  const [errorToShow, setErrorToShow] = useState<string | undefined>(undefined) // TODO error types
+  const [errorToShow, setErrorToShow] = useState<string | undefined>(undefined)
 
   return (
     <form>
