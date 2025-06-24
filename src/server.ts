@@ -35,12 +35,23 @@ async function validateUsername(request: FastifyRequest, reply: FastifyReply) {
   }
 }
 
+function checkInappropriateFields(draft: PostDraft): string[] {
+  const fields: (keyof PostDraft)[] = ['title', 'text', 'tags']
+  return fields.filter(field => INAPPROPRIATE_LANGUAGE.some(word => draft[field].toLowerCase().includes(word)))
+}
+
 function routes(fastify: FastifyInstance) {
   fastify.get('/health', () => ({ status: 'ok' }))
   fastify.get('/api/posts', { preHandler: validateUsername }, retrieveAllPosts)
   fastify.post('/api/posts', { preHandler: validateUsername }, (request, reply) => {
     const username = request.headers['x-username'] as string
     const draft = JSON.parse(request.body as string) as PostDraft
+    const inappropriateFields = checkInappropriateFields(draft)
+
+    if (inappropriateFields.length > 0) {
+      return reply.code(400).send({ error: 'Inappropriate language detected', fields: inappropriateFields })
+    }
+
     reply.code(201).send(createNewPost(username, draft))
   })
   fastify.addHook('onRequest', (request, reply, done) => {
@@ -62,3 +73,26 @@ const startServer = async () => {
 }
 
 startServer().then(() => console.log('Server started'))
+
+const INAPPROPRIATE_LANGUAGE = [
+  'spaghetti',
+  'code-smell',
+  'smell',
+  'hack',
+  'quick and dirty',
+  'workaround',
+  'kludge',
+  'hardcoded',
+  'magic number',
+  'copy-paste',
+  'anti-pattern',
+  'legacy',
+  'fragile',
+  'unmaintainable',
+  'messy',
+  'monolithic',
+  'god object',
+  'tightly coupled',
+  'dirty fix',
+  'technical debt',
+]
