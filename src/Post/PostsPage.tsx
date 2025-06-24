@@ -4,7 +4,7 @@ import { useModal } from '../helpers/Modal/ModalProvider.tsx'
 import { CreateNewPost } from './NewPost/CreateNewPost.tsx'
 
 export function PostsPage() {
-  const { open, isClosed } = useModal()
+  const { open } = useModal()
   const { loading: isUserLoading } = useUserSession()
 
   if (isUserLoading) {
@@ -18,7 +18,7 @@ export function PostsPage() {
         <button onClick={openCreateNewPostModal}>New Post</button>
       </header>
       <div>
-        <PostsList key={isClosed ? 'load' : 'reload'} />
+        <PostsList />
       </div>
     </article>
   )

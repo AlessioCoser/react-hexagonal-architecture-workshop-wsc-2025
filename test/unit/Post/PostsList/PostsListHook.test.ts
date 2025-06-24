@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { wrapWithQuery } from '../../../utils/rendeHelpers.tsx'
-import { renderHook, waitFor } from '@testing-library/react'
+import { act, renderHook, waitFor } from '@testing-library/react'
 import { usePostsList } from '../../../../src/Post/PostsList/PostsListHook.ts'
 import type { Post } from '../../../../src/Post/Post.ts'
 import { mockPostsListAPI } from '../../../utils/MockPostsListAPI.ts'
@@ -18,5 +18,17 @@ describe('PostsListHook', () => {
 
     await waitFor(() => expect(result.current.posts).toStrictEqual([firstPost, secondPost]))
     await waitFor(() => expect(result.current.isLoading).toBeFalsy())
+  })
+
+  it('should re-load the posts list', async () => {
+    const retrieveAllPosts = vi.fn(() => Promise.resolve([firstPost]))
+    const api = mockPostsListAPI({ retrieveAllPosts })
+    const { result } = renderHook(() => usePostsList(api), wrapWithQuery())
+    await waitFor(() => expect(result.current.posts).toStrictEqual([firstPost]))
+
+    retrieveAllPosts.mockResolvedValueOnce([firstPost, secondPost])
+    act(() => result.current.reload())
+
+    await waitFor(() => expect(result.current.posts).toStrictEqual([firstPost, secondPost]))
   })
 })

@@ -8,11 +8,12 @@ const postListAPI: PostsListAPI = createPostsListAPI()
 export type PostsList = {
   posts: Post[],
   isLoading: boolean,
+  reload: () => void
 }
 
 export const usePostsList = (API: PostsListAPI = postListAPI): PostsList => {
   const { user } = useUserSession()
-  const { data, isLoading } = useQuery<Post[]>({
+  const { data, isLoading, refetch } = useQuery<Post[]>({
     queryKey: ['posts-list', user?.name],
     queryFn: () => API.retrieveAllPosts(user),
   })
@@ -20,5 +21,6 @@ export const usePostsList = (API: PostsListAPI = postListAPI): PostsList => {
   return {
     posts: data ?? [],
     isLoading,
+    reload: () => refetch()
   }
 }

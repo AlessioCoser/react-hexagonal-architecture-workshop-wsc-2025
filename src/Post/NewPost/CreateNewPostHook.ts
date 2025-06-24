@@ -3,6 +3,7 @@ import type { PostDraft } from './PostDraft.ts'
 import { useState } from 'react'
 import { useUserSession } from '../../User/UserSessionHook.ts'
 import { type CreateNewPostAPIException, createNewPostsAPI, type NewPostsAPI } from './CreateNewPostAPI.ts'
+import { usePostsList } from '../PostsList/PostsListHook.ts'
 
 export type NewPost = {
   readonly draft: PostDraft
@@ -15,6 +16,7 @@ const newPostsAPI = createNewPostsAPI()
 
 export const useCreateNewPost = (API: NewPostsAPI = newPostsAPI): NewPost => {
   const { user } = useUserSession()
+  const { reload } = usePostsList()
   const [draft, setDraft] = useState<PostDraft>({ title: '', tags: '', text: '' })
   const { isPending, mutateAsync } = useMutation({
     mutationKey: ['create-new-post'],
@@ -26,7 +28,10 @@ export const useCreateNewPost = (API: NewPostsAPI = newPostsAPI): NewPost => {
     updateDraft: newDraft => setDraft(newDraft),
     publishDraft: () =>
       mutateAsync(draft)
-        .then(() => setDraft({ title: '', tags: '', text: '' }))
+        .then(() => {
+          setDraft({ title: '', tags: '', text: '' })
+          reload()
+        })
         .catch(error => Promise.reject(mapToErrorMessage(error))),
     isCreating: isPending,
   }

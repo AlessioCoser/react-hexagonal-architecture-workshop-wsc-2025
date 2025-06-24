@@ -4,6 +4,7 @@ import { mockCreateNewPostAPI } from '../../../utils/MockCreateNewPostAPI.ts'
 import { useCreateNewPost } from '../../../../src/Post/NewPost/CreateNewPostHook.ts'
 import { mockUseUserSession } from '../../../utils/MockUseUserSessionHook.ts'
 import { wrapWithQuery } from '../../../utils/rendeHelpers.tsx'
+import { mockPostsListHook } from '../../../utils/MockPostsListHook.ts'
 
 describe('CreateNewPostHook', () => {
   const emptyDraft = { title: '', tags: '', text: '' }
@@ -11,6 +12,7 @@ describe('CreateNewPostHook', () => {
 
   beforeEach(() => {
     mockUseUserSession()
+    mockPostsListHook()
   })
 
   it('empty draft at the beginning', async () => {
@@ -29,8 +31,9 @@ describe('CreateNewPostHook', () => {
     expect(result.current.draft).toStrictEqual(aDraft)
   })
 
-  it('should call the create new post API correctly and reset the draft', async () => {
+  it('should call the create new post API correctly, reset the draft and reload', async () => {
     mockUseUserSession({ user: { name: 'name' }, loading: false })
+    const postlist = mockPostsListHook()
     const api = mockCreateNewPostAPI()
     const { result } = renderHook(() => useCreateNewPost(api), wrapWithQuery())
     act(() => result.current.updateDraft(aDraft))
@@ -39,6 +42,7 @@ describe('CreateNewPostHook', () => {
 
     await waitFor(() => expect(api.createNewPost).toHaveBeenCalledWith(aDraft, { name: 'name' }))
     await waitFor(() => expect(result.current.draft).toStrictEqual(emptyDraft))
+    await waitFor(() => expect(postlist.reload).toHaveBeenCalled())
   })
 
   it('should handle UNAUTHORIZED error', async () => {

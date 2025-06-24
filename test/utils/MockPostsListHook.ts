@@ -5,6 +5,7 @@ export function mockPostsListHook(obj: Partial<toMock.PostsList> = {}): toMock.P
   const mocked = {
     posts: [],
     isLoading: false,
+    reload: vi.fn(),
     ...obj,
   }
   vi.spyOn(toMock, 'usePostsList').mockImplementation(() => mocked)
