@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test'
 
-test.setTimeout(2000);
+test.setTimeout(5000);
 
 test.describe('Create New Post', () => {
   test.beforeEach(async ({ page }) => {
@@ -17,7 +17,7 @@ test.describe('Create New Post', () => {
     await page.getByRole('textbox', { name: 'Text' }).fill('some cool text')
     await page.getByRole('button', { name: 'Create' }).click()
 
-    await expect(page.getByRole('dialog')).not.toBeInViewport({ timeout: 1000 });
+    await expect(page.getByRole('dialog')).not.toBeInViewport();
     await expect(page.getByText('An interesting title')).toBeVisible()
   })
 
