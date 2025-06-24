@@ -5,7 +5,12 @@ import { useUserSession } from '../../User/UserSessionHook.ts'
 
 const postListAPI: PostsListAPI = createPostsListAPI()
 
-export const usePostsList = (API: PostsListAPI = postListAPI) => {
+export type PostsList = {
+  posts: Post[],
+  isLoading: boolean,
+}
+
+export const usePostsList = (API: PostsListAPI = postListAPI): PostsList => {
   const { user } = useUserSession()
   const { data, isLoading } = useQuery<Post[]>({
     queryKey: ['posts-list', user?.name],
