@@ -2,7 +2,7 @@
 
 ## Prerequisites
 - Node.js
-- pnpm
+- [pnpm](https://pnpm.io/it/installation)
 
 ## Setup
 Install dependencies:
