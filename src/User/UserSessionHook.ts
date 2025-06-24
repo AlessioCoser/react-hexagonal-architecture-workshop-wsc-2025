@@ -1,5 +1,6 @@
-import { loadOrGenerateUser, type User } from './User.ts'
+import { type User } from './User.ts'
 import { useQuery } from '@tanstack/react-query'
+import { loadOrGenerateUser } from './UserLoader.ts'
 
 export type UserSession = { user: undefined; loading: true } | { user: User; loading: false }
 

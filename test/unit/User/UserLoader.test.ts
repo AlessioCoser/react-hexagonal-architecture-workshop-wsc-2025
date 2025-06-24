@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { loadOrGenerateUser } from '../../../src/User/User.ts'
+import { loadOrGenerateUser } from '../../../src/User/UserLoader.ts'
 
-describe('User', () => {
+describe('UserLoader', () => {
   beforeEach(() => {
     localStorage.clear()
   })
