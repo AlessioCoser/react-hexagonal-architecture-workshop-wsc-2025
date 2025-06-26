@@ -1,5 +1,15 @@
 # Hexagonal Architecture Workshop - WSC 2025
 
+It’s your first day in a new team, and you've just been handed your first product.
+
+You’re given an app that lets anyone send anonymous messages in a public chat — simple and open.
+
+They say they tried applying Hexagonal Architecture, but you’ve never seen it used on the front-end.
+
+Your job is to figure out how the app works and then extend it.
+
+So you start by reading the README and diving into the code to understand how everything fits together.
+
 ## Prerequisites
 - Node.js
 - [pnpm](https://pnpm.io/it/installation)
